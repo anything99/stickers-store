@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة التحكم — ستكرس</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="admin-body">
+
+<!-- LOGIN GATE -->
+<div class="admin-login" id="adminLogin">
+  <div class="glass">
+    <div class="brand-mark" style="margin:0 auto 18px; width:52px; height:52px; font-size:1.4rem">S</div>
+    <h2 style="margin:0 0 6px">لوحة تحكم ستكرس</h2>
+    <p style="color:var(--dim); font-size:.88rem; margin-bottom:24px">أدخل كلمة المرور للمتابعة</p>
+    <div class="field" style="text-align:start">
+      <input type="password" id="adminPass" placeholder="كلمة المرور" style="text-align:center; letter-spacing:2px">
+      <div class="error-msg" id="loginError" style="display:block; opacity:0">كلمة مرور خاطئة</div>
+    </div>
+    <button class="btn btn-primary" id="loginBtn" style="width:100%; margin-top:8px">دخول <i class="fa-solid fa-arrow-left"></i></button>
+    <p class="hint" style="margin-top:16px">لتغيير كلمة المرور، عدّل CONFIG.ADMIN_PASSWORD_HASH في admin.js</p>
+  </div>
+</div>
+
+<!-- ADMIN SHELL -->
+<div class="admin-shell" id="adminShell">
+  <aside class="admin-side">
+    <a href="index.html" class="brand" style="margin-bottom:24px"><span class="brand-mark">S</span><span>ستكرس</span></a>
+    <div class="admin-link active" data-view="dashboard"><i class="fa-solid fa-chart-line"></i> نظرة عامة</div>
+    <div class="admin-link" data-view="orders"><i class="fa-solid fa-box"></i> الطلبات</div>
+    <div style="flex:1"></div>
+    <div class="admin-link" id="darkToggle"><i class="fa-solid fa-moon"></i> الوضع الليلي/النهاري</div>
+    <div class="admin-link" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> تسجيل الخروج</div>
+  </aside>
+
+  <main class="admin-main">
+    <div class="admin-topbar">
+      <div>
+        <h2 style="margin:0">مرحبًا 👋</h2>
+        <p style="color:var(--dim); margin:4px 0 0; font-size:.88rem">هذه لمحة عن نشاط متجرك</p>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap">
+        <div class="glass" style="display:flex; align-items:center; padding:0 12px; border-radius:12px">
+          <i class="fa-solid fa-magnifying-glass" style="color:var(--dim)"></i>
+          <input id="searchInput" placeholder="ابحث بالاسم أو الهاتف أو الولاية" style="background:none; border:none; color:var(--paper); padding:10px 10px; outline:none; width:220px">
+        </div>
+        <button class="btn btn-ghost" id="refreshBtn"><i class="fa-solid fa-rotate"></i> تحديث</button>
+        <button class="btn btn-primary" id="exportBtn"><i class="fa-solid fa-file-csv"></i> تصدير CSV</button>
+      </div>
+    </div>
+
+    <div class="grid grid-4" style="margin-bottom:26px">
+      <div class="glass stat-card"><b id="statTotal">0</b><span>إجمالي الطلبات</span></div>
+      <div class="glass stat-card"><b id="statToday">0</b><span>طلبات اليوم</span></div>
+      <div class="glass stat-card"><b id="statRevenue">0 دج</b><span>إجمالي القيمة التقديرية</span></div>
+      <div class="glass stat-card"><b id="statStates">0</b><span>ولايات مغطاة</span></div>
+    </div>
+
+    <div class="glass table-wrap" style="padding:8px 16px">
+      <table class="orders-table" id="ordersTable">
+        <thead>
+          <tr>
+            <th>التاريخ</th>
+            <th>الزبون</th>
+            <th>الهاتف</th>
+            <th>الولاية / البلدية</th>
+            <th>المقاس</th>
+            <th>الكمية</th>
+            <th>السعر</th>
+            <th>التصميم</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="ordersBody">
+          <tr><td colspan="9"><div class="skeleton" style="height:20px; margin:8px 0"></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="hint" style="margin-top:14px">
+      * لعرض الطلبات هنا، اربط رابط Google Apps Script في assets/js/admin.js — راجع README.md.
+    </p>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="assets/js/admin.js"></script>
+</body>
+</html>
